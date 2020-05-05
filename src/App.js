@@ -1,11 +1,12 @@
 import _ from "lodash";
-import React, { Component } from "react";
+import axios from "axios";
+import React, { Component, Fragment } from "react";
 import BikePartsPage from "./components/BikePartsPage";
 import Cities from "./components/Cities";
 import Table from "./components/Table";
 import NavBar from "./components/NavBar";
 import { paginate } from "./components/utilities/paginate";
-import axios from "axios";
+import { setState } from "./components/utilities/setState";
 
 class App extends Component {
   state = {
@@ -23,16 +24,17 @@ class App extends Component {
 
   componentDidMount() {
     const localStorageData = localStorage.getItem("localStorageData");
+
     localStorageData !== null
-      ? this.setState({ data: JSON.parse(localStorageData) }, () =>
-          this.setState({ filteredData: this.state.data }, () => {
-            const localStorageCurrentPage = localStorage.getItem(
-              "localStorageCurrentPage"
-            );
-            if (localStorageCurrentPage !== null)
-              this.handlePageChange(localStorageCurrentPage);
-          })
-        )
+      ? (async () => {
+          await setState(this, { data: JSON.parse(localStorageData) });
+          await setState(this, { filteredData: this.state.data });
+          const localStorageCurrentPage = localStorage.getItem(
+            "localStorageCurrentPage"
+          );
+          if (localStorageCurrentPage !== null)
+            this.handlePageChange(localStorageCurrentPage);
+        })()
       : axios
           .get("data/result-bike_parts-multi-pages.json")
           .then(({ data }) => {
@@ -67,7 +69,8 @@ class App extends Component {
     });
   };
 
-  handleCityChange = (city) => {
+  handleCityChange = async (city) => {
+    console.log("this.value/city: ", city);
     const filteredData =
       city.toLowerCase() === "show all"
         ? this.state.data
@@ -75,12 +78,13 @@ class App extends Component {
             .filter((el) => el.Address.toLowerCase() === city.toLowerCase())
             .value();
 
-    this.setState({ filteredData }, () => this.handlePageChange(1));
+    await setState(this, { filteredData });
+    this.handlePageChange(1);
   };
 
   render() {
     return (
-      <React.Fragment>
+      <Fragment>
         <NavBar
           helloworldCount={
             this.state.filteredData === null
@@ -99,7 +103,7 @@ class App extends Component {
           onPageChange={this.handlePageChange}
           currentPage={this.state.currentPage}
         />
-      </React.Fragment>
+      </Fragment>
     );
   }
 }
