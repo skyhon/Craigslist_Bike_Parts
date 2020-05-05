@@ -1,0 +1,12 @@
+.bodyColor {
+  background-color: greenyellow;
+  padding: 10px;
+}
+.blinking {
+  animation: blinkingText 0.8s linear infinite;
+}
+@keyframes blinkingText {
+  50% {
+    opacity: 0;
+  }
+}

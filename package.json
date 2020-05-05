@@ -1,11 +1,16 @@
 {
-  "name": "helloworld2",
+  "name": "Craigslist_Bike_Parts",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "DatePicker": "^2.0.0",
+    "axios": "^0.19.2",
+    "bootstrap": "^4.4.1",
+    "font-awesome": "^4.7.0",
+    "lodash": "^4.17.15",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
-    "react-scripts": "2.1.5"
+    "react-scripts": "^3.4.1"
   },
   "scripts": {
     "start": "react-scripts start",
