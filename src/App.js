@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import BikePartsPage from "./components/BikePartsPage";
-import HelloWorlds from "./components/HelloWorlds";
 import Cities from "./components/Cities";
 import Table from "./components/Table";
 import NavBar from "./components/NavBar";
@@ -54,31 +53,6 @@ class App extends Component {
     this.setState({ helloworlds });
   };
 
-  handleDecrement = (helloworld) => {
-    console.log("handleDecrement", helloworld);
-    let helloworlds = [...this.state.helloworlds];
-    const index = helloworlds.indexOf(helloworld);
-    helloworlds[index] = { ...helloworld };
-    const { count } = helloworlds[index];
-    helloworlds[index].count = count <= 0 ? 0 : count - 1;
-    this.setState({ helloworlds });
-  };
-
-  handleDelete = (counterId) => {
-    const helloworlds = this.state.helloworlds.filter(
-      (h) => h.id !== counterId
-    );
-    this.setState({ helloworlds });
-  };
-
-  handleLike = (helloworld) => {
-    let helloworlds = [...this.state.helloworlds];
-    const index = helloworlds.indexOf(helloworld);
-    helloworlds[index] = { ...helloworld };
-    helloworlds[index].liked = !helloworlds[index].liked;
-    this.setState({ helloworlds });
-  };
-
   handlePageChange = (page) => {
     localStorage.setItem("localStorageCurrentPage", page);
     this.setState({ currentPage: Number(page) }, () => {
@@ -115,13 +89,6 @@ class App extends Component {
           }
         />
         <BikePartsPage title="Bike Parts Page" />
-        <HelloWorlds
-          helloworlds={this.state.helloworlds}
-          onIncrement={this.handleIncrement}
-          onDecrement={this.handleDecrement}
-          onDelete={this.handleDelete}
-          onLike={this.handleLike}
-        />
         <br />
         <Cities onCityChange={this.handleCityChange} data={this.state.data} />
         <br />
