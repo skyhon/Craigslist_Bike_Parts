@@ -3,8 +3,8 @@ export function setState(thisObj, jsonObj) {
     try {
       thisObj.setState(jsonObj);
       resolve();
-    } catch (e) {
-      reject(e.message);
+    } catch (err) {
+      reject(err.message);
     }
   });
 }

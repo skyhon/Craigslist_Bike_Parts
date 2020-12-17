@@ -8,7 +8,7 @@ class Cities extends Component {
     return (
       <Fragment>
         <select
-          id="city"
+          id="select_city"
           onChange={(event) => {
             const city = event.target.value;
             onCityChange(city);
