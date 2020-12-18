@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 
 class Cities extends Component {
   render() {
@@ -6,7 +6,7 @@ class Cities extends Component {
     const cities =
       data !== null ? Array.from(new Set(data.map((el) => el.Address))) : [];
     return (
-      <Fragment>
+      <>
         <select
           id="select_city"
           onChange={(event) => {
@@ -26,7 +26,7 @@ class Cities extends Component {
             </option>
           ))}
         </select>
-      </Fragment>
+      </>
     );
   }
 }

@@ -5,7 +5,7 @@ const Pagination = (props) => {
   const pages = _.range(1, Math.ceil(itemsCount / pageSize) + 1);
 
   return pages <= 1 ? (
-    <div></div>
+    <></>
   ) : (
     <nav>
       <ul className="pagination">
